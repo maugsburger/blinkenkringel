@@ -14905,6 +14905,20 @@ max 66µA@3.2V</text>
 <wire x1="38.1" y1="137.16" x2="43.18" y2="137.16" width="0.1524" layer="91"/>
 </segment>
 </net>
+<net name="N$49" class="0">
+<segment>
+<pinref part="LED1" gate="B" pin="C"/>
+<pinref part="R38" gate="G$1" pin="2"/>
+<wire x1="93.98" y1="63.5" x2="96.52" y2="63.5" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$50" class="0">
+<segment>
+<pinref part="R39" gate="G$1" pin="2"/>
+<pinref part="LED1" gate="A" pin="C"/>
+<wire x1="96.52" y1="55.88" x2="93.98" y2="55.88" width="0.1524" layer="91"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
