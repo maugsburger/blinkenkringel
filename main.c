@@ -5,6 +5,7 @@
 #include "led.h"
 #include "key.h"
 #include "patterns.h"
+#include "sleep.h"
 
 /* Counter Usage:
  * TC0 in led.c
@@ -23,6 +24,9 @@
 
 
 int main (void) {
+    // disable unused functions
+    PRR = (1<<PRUSI) | (1<<PRUSART);
+
     // init pwm counter
     led_init_timer_port();
     key_init_timer_port();
