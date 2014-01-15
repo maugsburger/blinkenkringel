@@ -7,6 +7,8 @@ void sleep_idle( void ){
 }
 
 void sleep_powerdown( void ){
+    PRR |= PWRDOWN_PRR;
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_mode();
+    PRR &= ~PWRDOWN_PRR;
 }
