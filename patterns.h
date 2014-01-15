@@ -64,11 +64,11 @@ const __flash light_pattern lp_stand_dim = { 1, 1, &lp_elements_single_dim };
 const __flash light_pattern lp_stand_upramp = { 5, 1, &lp_elements_single_upramp };
 
 const __flash light_pattern *light_patterns[] = {
-    &lp_stand_upramp,
-    &lp_stand_dim,
     &lp_rotate_dim,
+//    &lp_stand_dim,
+//    &lp_stand_upramp,
     &lp_dualflash,
-//    &lp_dualflash_s,
+    &lp_dualflash_s,
     &lp_rotate
 };
 
