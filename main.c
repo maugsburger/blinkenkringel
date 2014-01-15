@@ -20,8 +20,10 @@
  *  - wait_countdown-- for pattern timer
  *  - key debouncing in interrupt routine
  */
-#define LED_RED    4
-#define LED_GREEN  5
+#define PLED_RED    4
+#define PLED_GREEN  5
+#define PLED_PORT   PORTD
+#define PLED_DDR    DDRD
 
 int main (void) {
     // disable unused functions
@@ -32,15 +34,15 @@ int main (void) {
     key_init_timer_port();
     sei();
 
-    LED_DDR |= (1<<LED_RED) | (1<<LED_GREEN);
+    PLED_DDR |= (1<<PLED_RED) | (1<<PLED_GREEN);
     
     // alive signal 
-    LED_PORT |= (1<<LED_RED) | (1<<LED_GREEN);
+    PLED_PORT |= (1<<PLED_RED) | (1<<PLED_GREEN);
     led_set_mode_r( 0x44, 0x44, 0 );
     _delay_ms(50);
     led_set_mode_r( 0x00, 0x00, 0 );
     _delay_ms(500);
-    LED_PORT &= ~( (1<<LED_GREEN) | (1<<LED_RED) );
+    PLED_PORT &= ~( (1<<PLED_GREEN) | (1<<PLED_RED) );
 
     uint8_t i=0;
     for(;;) {
@@ -50,7 +52,7 @@ int main (void) {
                 if ( key_press & ALL_KEYS ) {
                     led_set_mode_r(0x00,0x00,0);
                     if( get_key_short( 1<<KEY0 )) {
-                        LED_PORT ^= 1<<LED_GREEN;
+                        PLED_PORT ^= 1<<PLED_GREEN;
                         r = 0;
                         p = 0;
                         i++;
@@ -60,9 +62,9 @@ int main (void) {
 
                     if( get_key_long( 1<<KEY0 )) {
                         //TODO: Poweroff!
-                        LED_PORT = 1<<LED_RED;
+                        PLED_PORT = 1<<PLED_RED;
                         _delay_ms(1000);
-                        LED_PORT ^= 1<<LED_RED;
+                        PLED_PORT ^= 1<<PLED_RED;
                         sleep_powerdown();
                     }
                 } else {
