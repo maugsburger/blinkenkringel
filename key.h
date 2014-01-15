@@ -5,7 +5,6 @@
 #define KEY_PORT        PORTD
 #define KEY_PIN         PIND
 #define KEY0            6
-#define KEY1            7 // not used
 #define ALL_KEYS        (1<<KEY0)
 
 #define REPEAT_MASK     (1<<KEY0)   // repeat: key1, key2
