@@ -95,7 +95,7 @@ ISR (TIMER0_COMPA_vect) {
 
 void led_init_timer_port () {
     TCCR0A = (1<<WGM01); // CTC
-    TCCR0B = (1<<CS02) | (1<<CS02); // PRESCALE /1024
+    TCCR0B = (1<<CS02); // PRESCALE /256
     OCR0A = 0;
     TIMSK |= (1<<OCIE0A);
     LED_DDR |= 0x0f;
