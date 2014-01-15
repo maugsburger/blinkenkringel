@@ -11,7 +11,8 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <key.h>
+#include "key.h"
+#include "sleep.h"
 
 
 volatile uint8_t wait_countdown = 0;
@@ -90,8 +91,7 @@ void key_wait_times_5ms ( const uint8_t times ) {
     TCNT1 = 0; // 
     sei();
     while ( wait_countdown ) {
-        // TODO sleep mode
-        asm volatile ("nop");
+        sleep_idle();
         // key pressed -> exit current wait
         if ( key_press & ALL_KEYS ) return;
     };
