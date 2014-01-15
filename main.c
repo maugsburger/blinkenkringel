@@ -53,7 +53,7 @@ int main (void) {
     _delay_ms(50);
     led_set_mode_r( 0x00, 0x00, 0 );
     _delay_ms(500);
-    PLED_PORT &= ~( (1<<PLED_GREEN) | (1<<PLED_RED) );
+    PLED_PORT &= ~(1<<PLED_RED);
 
     uint8_t i=0;
     for(;;) {
@@ -63,7 +63,6 @@ int main (void) {
                 if ( key_press & ALL_KEYS ) {
                     led_set_mode_r(0x00,0x00,0);
                     if( get_key_short( 1<<KEY0 )) {
-                        PLED_PORT ^= 1<<PLED_GREEN;
                         r = 0;
                         p = 0;
                         i++;
@@ -72,10 +71,11 @@ int main (void) {
                     }
 
                     if( get_key_long( 1<<KEY0 )) {
+//                        PLED_PORT |= 1<<PLED_RED;
+                        PLED_PORT &= ~((1<<PLED_RED) | (1<<PLED_GREEN));
                         change_clock_prescale( 0x03 );  // /8
-                        PLED_PORT = 1<<PLED_RED;
-                        _delay_ms(125);     // 1s in reality, due to clock/8
-                        PLED_PORT ^= 1<<PLED_RED;
+                        // wait for key release (with pullup=>1)
+                        loop_until_bit_is_set( KEY_PIN, KEY0 );
                         POWER_PORT &= ~(1<<POWER_PIN);
                         sleep_powerdown();
                     }

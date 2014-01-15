@@ -50,6 +50,5 @@ void change_clock_prescale( uint8_t exponent ) {
 
 ISR (PCINT_D_vect) {
     // simulate hard reset with wdt
-    cli();
     soft_reset();
 }

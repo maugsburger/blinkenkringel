@@ -9,7 +9,7 @@
 
 #define REPEAT_MASK     (1<<KEY0)   // repeat: key1, key2
 #define REPEAT_START    200         // after 1s
-#define REPEAT_NEXT     200         // not used, strange effects if <REPEAT_START
+#define REPEAT_NEXT     4           // not used, strange effects if <REPEAT_START
 
 volatile uint8_t key_state;      // debounced and inverted key state: 1:pressed
 volatile uint8_t key_press;      // key press detect
