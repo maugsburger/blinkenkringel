@@ -39,6 +39,15 @@ void sleep_powerdown( void ){
     sei();
 }
 
+// sets system clock prescaler to 2^exponent
+void change_clock_prescale( uint8_t exponent ) {
+    cli();
+    CLKPR = (1<<CLKPCE);
+    CLKPR = exponent;
+    sei();
+}
+
+
 ISR (PCINT_D_vect) {
     // simulate hard reset with wdt
     cli();

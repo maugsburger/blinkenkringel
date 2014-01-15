@@ -25,20 +25,31 @@
 #define PLED_PORT   PORTD
 #define PLED_DDR    DDRD
 
+#define POWER_PIN   1
+#define POWER_PORT  PORTB
+#define POWER_DDR   DDRB
+
 int main (void) {
     // disable unused functions
     PRR = (1<<PRUSI) | (1<<PRUSART);
 
+    // switch on stepup, change frequency after short delay
+    POWER_DDR |= (1<<POWER_PIN);
+    POWER_PORT |= (1<<POWER_PIN);
+    
     // init pwm counter
     led_init_timer_port();
     key_init_timer_port();
+
+    // init is enough delay for clean voltage
+    change_clock_prescale( 0x00 );  // full speed
     sei();
 
     PLED_DDR |= (1<<PLED_RED) | (1<<PLED_GREEN);
     
     // alive signal 
     PLED_PORT |= (1<<PLED_RED) | (1<<PLED_GREEN);
-    led_set_mode_r( 0x44, 0x44, 0 );
+    led_set_mode_r( 0x11, 0x11, 0 );
     _delay_ms(50);
     led_set_mode_r( 0x00, 0x00, 0 );
     _delay_ms(500);
@@ -61,10 +72,11 @@ int main (void) {
                     }
 
                     if( get_key_long( 1<<KEY0 )) {
-                        //TODO: Poweroff!
+                        change_clock_prescale( 0x03 );  // /8
                         PLED_PORT = 1<<PLED_RED;
-                        _delay_ms(1000);
+                        _delay_ms(125);     // 1s in reality, due to clock/8
                         PLED_PORT ^= 1<<PLED_RED;
+                        POWER_PORT &= ~(1<<POWER_PIN);
                         sleep_powerdown();
                     }
                 } else {
