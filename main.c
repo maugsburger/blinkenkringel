@@ -2,6 +2,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <avr/wdt.h>
 #include "led.h"
 #include "key.h"
 #include "patterns.h"
@@ -19,9 +20,8 @@
  *  - wait_countdown-- for pattern timer
  *  - key debouncing in interrupt routine
  */
-#define LED_RED     4
-#define LED_GREEN   5
-
+#define LED_RED    4
+#define LED_GREEN  5
 
 int main (void) {
     // disable unused functions
@@ -60,8 +60,10 @@ int main (void) {
 
                     if( get_key_long( 1<<KEY0 )) {
                         //TODO: Poweroff!
-                        LED_PORT ^= 1<<LED_RED;
+                        LED_PORT = 1<<LED_RED;
                         _delay_ms(1000);
+                        LED_PORT ^= 1<<LED_RED;
+                        sleep_powerdown();
                     }
                 } else {
                     led_set_mode_r(
