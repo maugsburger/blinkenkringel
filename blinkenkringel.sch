@@ -14023,8 +14023,8 @@ Source: http://www.osram.convergy.de/</description>
 <part name="DD-GND1" library="solpad" deviceset="MCS10B" device=""/>
 <part name="BAT+" library="solpad" deviceset="MCS10B" device=""/>
 <part name="BAT-" library="solpad" deviceset="MCS10B" device=""/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="0207/7" value="15k"/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="0207/7" value="33k"/>
+<part name="R1" library="rcl" deviceset="R-EU_" device="0207/7" value="12k"/>
+<part name="R2" library="rcl" deviceset="R-EU_" device="0207/7" value="15k"/>
 <part name="C1" library="rcl" deviceset="CPOL-EU" device="E5-8.5" value="470u"/>
 <part name="C2" library="rcl" deviceset="CPOL-EU" device="E5-8.5" value="470u"/>
 <part name="Q1" library="mosfet" deviceset="IRLML2502" device=""/>
@@ -14122,8 +14122,8 @@ Source: http://www.osram.convergy.de/</description>
 <sheet>
 <plain>
 <text x="30.48" y="119.38" size="1.778" layer="97">ca 1.1V Bandgap
-BAT LOW 1,6V (2x0,8V)
-max 66µA@3.2V</text>
+BAT LOW 2V (2x1V)
+max 118µA@3.2V</text>
 <wire x1="45.72" y1="165.1" x2="45.72" y2="147.32" width="0.3048" layer="97"/>
 <wire x1="45.72" y1="147.32" x2="71.12" y2="147.32" width="0.3048" layer="97"/>
 <wire x1="71.12" y1="147.32" x2="71.12" y2="165.1" width="0.3048" layer="97"/>
