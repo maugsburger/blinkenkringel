@@ -13,6 +13,7 @@
 #include <avr/interrupt.h>
 #include "key.h"
 #include "sleep.h"
+#include "led.h"
 
 
 volatile uint8_t wait_countdown = 0;
@@ -20,7 +21,6 @@ volatile uint8_t wait_countdown = 0;
 ISR (TIMER1_COMPA_vect) {         // every 5ms
     static uint8_t ct0, ct1, rpt;
 
-    //if( TCNT1L & 0x01 ) {
     // every 2nd run->10ms
     uint8_t i;
 

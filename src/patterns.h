@@ -14,10 +14,12 @@ typedef const __flash struct {
 } light_pattern;
 
 const __flash pattern_element lpe_0000_30 = { 0x00, 0x00, 30/5 };
+const __flash pattern_element lpe_0000_50 = { 0x00, 0x00, 50/5 };
 const __flash pattern_element lpe_0000_200 = { 0x00, 0x00, 200/5 };
 const __flash pattern_element lpe_0000_400 = { 0x00, 0x00, 400/5 };
 
 const __flash pattern_element lpe_4444_30 = { 0x44, 0x44, 30/5 }; 
+const __flash pattern_element lpe_4444_50 = { 0x44, 0x44, 50/5 }; 
 const __flash pattern_element lpe_4040_30 = { 0x40, 0x40, 30/5 }; 
 
 const __flash pattern_element lpe_4000_400 = { 0x40, 0x00, 70/5 };
@@ -34,7 +36,7 @@ const __flash pattern_element lpe_4000_5 = { 0x40, 0x00, 1 };
 
 
 const __flash pattern_element * const __flash lp_elements_dualflash[] = { 
-    &lpe_4444_30, &lpe_0000_30, &lpe_4444_30, &lpe_0000_400
+    &lpe_4444_50, &lpe_0000_50, &lpe_4444_50, &lpe_0000_400
 };
 
 const __flash pattern_element * const __flash lp_elements_dualflash_split[] = { 
