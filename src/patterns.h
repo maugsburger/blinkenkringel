@@ -55,6 +55,9 @@ const __flash pattern_element * const __flash lp_elements_single_upramp[] = {
     &lpe_1000_5, &lpe_2000_5, &lpe_3000_5, &lpe_4000_5, &lpe_0000_400
 };
 
+const __flash pattern_element * const __flash lp_elements_allmax[] = { 
+    &lpe_4444_50
+};
 
 
 
@@ -64,6 +67,7 @@ const __flash light_pattern lp_rotate = { 4, 4, &lp_elements_rotate };
 const __flash light_pattern lp_rotate_dim = { 1, 4, &lp_elements_single_dim };
 const __flash light_pattern lp_stand_dim = { 1, 1, &lp_elements_single_dim };
 const __flash light_pattern lp_stand_upramp = { 5, 1, &lp_elements_single_upramp };
+const __flash light_pattern lp_all_max = { 1, 1, &lp_elements_allmax };
 
 const __flash light_pattern *light_patterns[] = {
     &lp_rotate_dim,
@@ -71,7 +75,8 @@ const __flash light_pattern *light_patterns[] = {
 //    &lp_stand_upramp,
     &lp_dualflash,
     &lp_dualflash_s,
-    &lp_rotate
+    &lp_rotate,
+    &lp_all_max,
 };
 
 #endif //_PATTERNS_H
