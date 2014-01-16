@@ -12,8 +12,8 @@ Yes, even really small projects can have multiple features ;)
 * uses power-down mode, <0,2µA when switched off
 * dynamic clocking for save power-on on battery-voltage, stepup-converter is enabled only when running
 
-Demo
-----
+Video
+-----
 
 Breadboard Prototype:
 
