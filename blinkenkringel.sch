@@ -14117,6 +14117,8 @@ Source: http://www.osram.convergy.de/</description>
 <part name="S1" library="switch-tact" deviceset="DTS-3" device=""/>
 <part name="SUPPLY17" library="supply2" deviceset="GND" device=""/>
 <part name="C3" library="rcl" deviceset="C-EU" device="025-024X044" value="100n"/>
+<part name="C4" library="rcl" deviceset="C-EU" device="025-024X044" value="100n"/>
+<part name="SUPPLY18" library="supply2" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14130,6 +14132,8 @@ max 118µA@3.2V</text>
 <wire x1="71.12" y1="165.1" x2="45.72" y2="165.1" width="0.3048" layer="97"/>
 <text x="50.292" y="154.432" size="1.778" layer="97">DC-DC CONV
 9-4V -&gt; 5V</text>
+<text x="30.48" y="86.36" size="1.778" layer="97" rot="R180">needed for clean 
+startup after BOD</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -14247,6 +14251,8 @@ max 118µA@3.2V</text>
 <instance part="S1" gate="G$1" x="88.9" y="40.64" rot="R270"/>
 <instance part="SUPPLY17" gate="GND" x="96.52" y="35.56"/>
 <instance part="C3" gate="G$1" x="25.4" y="50.8"/>
+<instance part="C4" gate="G$1" x="30.48" y="88.9"/>
+<instance part="SUPPLY18" gate="GND" x="30.48" y="81.28"/>
 </instances>
 <busses>
 </busses>
@@ -14340,6 +14346,10 @@ max 118µA@3.2V</text>
 <wire x1="93.98" y1="40.64" x2="96.52" y2="40.64" width="0.1524" layer="91"/>
 <pinref part="SUPPLY17" gate="GND" pin="GND"/>
 <wire x1="96.52" y1="40.64" x2="96.52" y2="38.1" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C4" gate="G$1" pin="2"/>
+<pinref part="SUPPLY18" gate="GND" pin="GND"/>
 </segment>
 </net>
 <net name="V+" class="0">
@@ -14506,6 +14516,8 @@ max 118µA@3.2V</text>
 <wire x1="30.48" y1="104.14" x2="30.48" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="91.44" x2="33.02" y2="91.44" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="PA2(/RESET)"/>
+<pinref part="C4" gate="G$1" pin="1"/>
+<junction x="30.48" y="91.44"/>
 </segment>
 </net>
 <net name="N$2" class="0">
