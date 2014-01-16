@@ -14130,25 +14130,37 @@ max 118µA@3.2V</text>
 <wire x1="45.72" y1="147.32" x2="71.12" y2="147.32" width="0.3048" layer="97"/>
 <wire x1="71.12" y1="147.32" x2="71.12" y2="165.1" width="0.3048" layer="97"/>
 <wire x1="71.12" y1="165.1" x2="45.72" y2="165.1" width="0.3048" layer="97"/>
-<text x="50.292" y="154.432" size="1.778" layer="97">DC-DC CONV
+<text x="50.292" y="153.67" size="1.778" layer="97">DC-DC CONV
 9-4V -&gt; 5V</text>
 <text x="30.48" y="86.36" size="1.778" layer="97" rot="R180">needed for clean 
 startup after BOD</text>
+<wire x1="50.8" y1="160.02" x2="57.15" y2="160.02" width="0.1" layer="97" style="shortdash"/>
+<wire x1="57.15" y1="160.02" x2="57.15" y2="161.544" width="0.1" layer="97" style="shortdash"/>
+<wire x1="57.15" y1="161.544" x2="59.182" y2="160.02" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.182" y1="160.02" x2="57.15" y2="158.496" width="0.1" layer="97" style="shortdash"/>
+<wire x1="57.15" y1="158.496" x2="57.15" y2="160.02" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.182" y1="160.02" x2="66.04" y2="160.02" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.182" y1="160.02" x2="59.182" y2="161.544" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.182" y1="161.544" x2="58.674" y2="161.544" width="0.1" layer="97" style="shortdash"/>
+<wire x1="58.674" y1="161.544" x2="58.674" y2="161.036" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.182" y1="160.02" x2="59.182" y2="158.496" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.182" y1="158.496" x2="59.69" y2="158.496" width="0.1" layer="97" style="shortdash"/>
+<wire x1="59.69" y1="158.496" x2="59.69" y2="159.004" width="0.1" layer="97" style="shortdash"/>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="U$1" gate="G$1" x="53.34" y="73.66"/>
 <instance part="DD-OUT" gate="1" x="68.58" y="160.02" smashed="yes" rot="R90">
-<attribute name="NAME" x="61.214" y="162.56" size="1.778" layer="95"/>
+<attribute name="NAME" x="61.214" y="161.798" size="1.778" layer="95"/>
 </instance>
 <instance part="DD-GND2" gate="1" x="68.58" y="149.86" smashed="yes" rot="R90">
-<attribute name="NAME" x="59.436" y="152.4" size="1.778" layer="95"/>
+<attribute name="NAME" x="59.436" y="151.384" size="1.778" layer="95"/>
 </instance>
 <instance part="DD-IN" gate="1" x="48.26" y="160.02" smashed="yes" rot="R270">
-<attribute name="NAME" x="46.228" y="162.56" size="1.778" layer="95"/>
+<attribute name="NAME" x="46.228" y="161.798" size="1.778" layer="95"/>
 </instance>
 <instance part="DD-GND1" gate="1" x="48.26" y="149.86" smashed="yes" rot="R270">
-<attribute name="NAME" x="46.228" y="152.4" size="1.778" layer="95"/>
+<attribute name="NAME" x="46.228" y="151.384" size="1.778" layer="95"/>
 </instance>
 <instance part="BAT+" gate="1" x="12.7" y="157.48" smashed="yes" rot="R180">
 <attribute name="NAME" x="10.16" y="152.4" size="1.778" layer="95"/>
