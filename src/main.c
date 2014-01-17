@@ -25,10 +25,6 @@
 #define PLED_PORT   PORTD
 #define PLED_DDR    DDRD
 
-#define POWER_PIN   2
-#define POWER_PORT  PORTB
-#define POWER_DDR   DDRB
-
 int main (void) {
     uint8_t i=0;    // selected pattern;
     uint8_t pwrhyst = 0;

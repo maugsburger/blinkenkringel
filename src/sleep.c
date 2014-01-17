@@ -18,21 +18,30 @@ void disable_wdt( void ){
     wdt_disable();
 }
 
-
 void sleep_idle( void ){
     set_sleep_mode(SLEEP_MODE_IDLE);
     sleep_mode();   
 }
 
 void sleep_powerdown( void ){
+    power_boost( 0 );
     PRR |= PWRDOWN_PRR;
     // activate ICP interrupt
 //    TIMSK |= (1<<ICIE1);
     GIMSK |= (1<<4);    //PCIE2
     PCMSK2 |= (1<<PCINT17);
+    cli();
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-    sleep_mode();
+    //sleep_mode();   
+    //FIXME turn off bod while in sleep, see p.38 datasheet
+    sleep_enable();
+    BODCR = (1<<BPDS) | (1<<BPDSE);
+    BODCR = (1<<BPDS);
+    sei();
+    sleep_cpu();
+    sleep_disable();
     PRR &= ~PWRDOWN_PRR;
+    power_boost( 1 );
     // reenable counter
     led_init_timer_port();
     key_init_timer_port();
@@ -47,6 +56,13 @@ void change_clock_prescale( uint8_t exponent ) {
     sei();
 }
 
+void power_boost (uint8_t on) {
+    if( on ){
+        POWER_PORT |= (1<<POWER_PIN);
+    } else {
+        POWER_PORT &= ~(1<<POWER_PIN);
+    }
+}
 
 ISR (PCINT_D_vect) {
     // simulate hard reset with wdt

@@ -100,3 +100,4 @@ void led_init_timer_port () {
     TIMSK |= (1<<OCIE0A);
     LED_DDR |= 0x0f;
 }
+
