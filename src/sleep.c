@@ -8,14 +8,16 @@
 
 #define soft_reset() do { wdt_enable(WDTO_15MS); for(;;) { } } while(0) 
 
+uint8_t mcusr_mirror __attribute__ ((section (".noinit")));
 
-// disable wdt after reset
-void disable_wdt(void) __attribute__ ((naked)) \
-             __attribute__ ((section (".init3")));
-
-void disable_wdt( void ){
-    MCUSR = 0;
-    wdt_disable();
+void get_mcusr(void) \
+  __attribute__((naked)) \
+  __attribute__((section(".init3")));
+void get_mcusr(void)
+{
+  mcusr_mirror = MCUSR;
+  MCUSR = 0;
+  wdt_disable();
 }
 
 void sleep_idle( void ){
@@ -39,13 +41,7 @@ void sleep_powerdown( void ){
     BODCR = (1<<BPDS);
     sei();
     sleep_cpu();
-    sleep_disable();
-    PRR &= ~PWRDOWN_PRR;
-    power_boost( 1 );
-    // reenable counter
-    led_init_timer_port();
-    key_init_timer_port();
-    sei();
+    soft_reset();
 }
 
 // sets system clock prescaler to 2^exponent

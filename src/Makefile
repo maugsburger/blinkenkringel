@@ -63,7 +63,7 @@ AVRDUDE_MCU = attiny2313
 #         F_CPU = 18432000
 #         F_CPU = 20000000
 #F_CPU =  1000000
-F_CPU =  8000000
+F_CPU =  4000000
 
 
 # Output format. (can be srec, ihex, binary)

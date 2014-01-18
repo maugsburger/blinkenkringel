@@ -67,7 +67,6 @@ ISR (TIMER0_COMPA_vect) {
             break;
         case LED_INTENS_4:
         case LED_CYCLES/2 + LED_INTENS_4:
-            // all off
             LED_PORT &= ~(0x0F);
             break;
         case LED_INTENS_3:
@@ -98,6 +97,9 @@ void led_init_timer_port () {
     TCCR0B = (1<<CS02); // PRESCALE /256
     OCR0A = 0;
     TIMSK |= (1<<OCIE0A);
+    // signal leds
     LED_DDR |= 0x0f;
+    // power leds
+    PLED_DDR |= ((1<<PLED_RED) | (1<<PLED_GREEN));
 }
 

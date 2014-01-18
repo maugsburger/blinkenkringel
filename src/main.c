@@ -3,6 +3,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <avr/wdt.h>
+#include "main.h"
 #include "led.h"
 #include "key.h"
 #include "patterns.h"
@@ -19,17 +20,22 @@
  *  - CTC Interrupt OCR1A = 500, 5ms
  *  - wait_countdown-- for pattern timer
  *  - key debouncing in interrupt routine
+ *  INFO PROBABLY OUTDATED DUE TO CLOCK CHANGE TO 4MHZ!
  */
-#define PLED_RED    4
-#define PLED_GREEN  5
-#define PLED_PORT   PORTD
-#define PLED_DDR    DDRD
 
 int main (void) {
+    // disable unused functions for powersaving
+    PRR = (1<<PRUSI) | (1<<PRUSART);
+
+    change_clock_prescale( 0x01 );  // full speed 4MHz
+
+    // brownout @1.8V if device is started with insuficcient bats.
+    if ( mcusr_mirror == (1<<BORF) ) {
+        blink_red_powersave();
+        sleep_powerdown();        
+    }
     uint8_t i=0;    // selected pattern;
     uint8_t pwrhyst = 0;
-    // disable unused functions
-    PRR = (1<<PRUSI) | (1<<PRUSART);
 
     // switch on stepup, change frequency after short delay
     POWER_DDR |= (1<<POWER_PIN);
@@ -43,44 +49,41 @@ int main (void) {
     led_init_timer_port();
     key_init_timer_port();
 
-    // init is enough delay for clean voltage
-    change_clock_prescale( 0x00 );  // full speed
-
     // alive signal 
-    PLED_DDR |= (1<<PLED_RED) | (1<<PLED_GREEN);
-    PLED_PORT |= (1<<PLED_RED) | (1<<PLED_GREEN);
+    pled_on( (1<<PLED_RED) | (1<<PLED_GREEN) );
     led_set_mode_r( 0x11, 0x11, 0 );
     _delay_ms(50);
     led_set_mode_r( 0x00, 0x00, 0 );
     _delay_ms(500);
+    pled_off( (1<<PLED_RED) );
 
     // check initial bat state for undervolt
-    if ( (ACSR & (1<<ACO)) ) pwrhyst = 0x0F;
+    if ( (ACSR & (1<<ACO)) ) pwrhyst = 0xFF;
     sei();
 
     for(;;) {
 
         for(uint8_t r=0; r< (*light_patterns[i]).rotate; r++) {
-            // if there is a longer delay, then directly after rotation change
-            // so check batt voltage here!
+            // if there is a change to measure with leds off, then here
+            // => check bat voltage
             if ( ACSR & (1<<ACO) ) {
-                // undervoltage
-                if ( pwrhyst == 0x0F ) {
-                    PLED_PORT |= (1<<PLED_RED);
-                    PLED_PORT &= ~(1<<PLED_GREEN);
+                if ( pwrhyst == 0x0f ) { 
+                    pled_on( 1<<PLED_RED);
+                    pled_off(1<<PLED_GREEN);
                 } else {
                     pwrhyst++;
                 }
             } else {
                 if ( pwrhyst == 0x00 ) {
-                    PLED_PORT &= ~(1<<PLED_RED);
-                    PLED_PORT |= (1<<PLED_GREEN);
+                    pled_on(1<<PLED_GREEN);
+                    pled_off( 1<<PLED_RED);
                 } else {
                     pwrhyst--;
                 }
-            }
+            } 
             for(uint8_t p=0; p<(*light_patterns[i]).nr_elements; p++) {
                 if ( key_press & ALL_KEYS ) {
+                    pwrhyst = 0;
                     led_set_mode_r(0x00,0x00,0);
                     if( get_key_short( 1<<KEY0 )) {
                         r = 0;
@@ -89,13 +92,10 @@ int main (void) {
                         if ( i >= sizeof(light_patterns)/sizeof(light_patterns[0]) )
                             i = 0;
                     }
-
                     if( get_key_long( 1<<KEY0 )) {
-                        PLED_PORT &= ~((1<<PLED_RED) | (1<<PLED_GREEN));
-                        change_clock_prescale( 0x03 );  // /8
+                        pled_off( (1<<PLED_RED) | (1<<PLED_GREEN) );
                         // wait for key release (with pullup=>1)
                         loop_until_bit_is_set( KEY_PIN, KEY0 );
-                        POWER_PORT &= ~(1<<POWER_PIN);
                         sleep_powerdown();
                     }
                 } else {
@@ -112,3 +112,15 @@ int main (void) {
     }
 }
 
+
+void blink_red_powersave() {
+    power_boost( 0 );
+    PRR |= PWRDOWN_PRR; // disable timer 
+    pled_on( 1<<PLED_RED);
+    pled_off(1<<PLED_GREEN);
+    for(uint8_t i=10; i!=0; i--){   // TODO: raise to 100 after development
+        pled_toggle(1<<PLED_RED);
+        _delay_ms(300);
+    }
+    pled_off( 1<<PLED_RED);
+}

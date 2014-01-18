@@ -70,13 +70,13 @@ const __flash light_pattern lp_stand_upramp = { 5, 1, &lp_elements_single_upramp
 const __flash light_pattern lp_all_max = { 1, 1, &lp_elements_allmax };
 
 const __flash light_pattern *light_patterns[] = {
+    &lp_all_max,
     &lp_rotate_dim,
 //    &lp_stand_dim,
 //    &lp_stand_upramp,
     &lp_dualflash,
     &lp_dualflash_s,
     &lp_rotate,
-    &lp_all_max,
 };
 
 #endif //_PATTERNS_H
