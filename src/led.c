@@ -3,6 +3,12 @@
 #include <avr/interrupt.h>
 #include "led.h"
 
+#ifdef LED_UPPER
+#define LED_SHIFT 4
+#else
+#define LED_SHIFT 0
+#endif
+
 void led_set_mode_r( const uint8_t l12_mode, const uint8_t l34_mode, const uint8_t pos ) {
     uint8_t leda = l12_mode>>4;
     uint8_t ledb = l12_mode & 0x07;
@@ -59,47 +65,49 @@ ISR (TIMER0_COMPA_vect) {
         // g1:
         case LED_CYCLES-1:
             led_pwm_cycle = 0;
-            LED_PORT |= _led_mode_a & 0x03;
+            LED_PORT |= (_led_mode_a & 0x03)<<LED_SHIFT;
             break;
         // g2:
         case LED_CYCLES/2:
-            LED_PORT |= _led_mode_a & 0x0C;
+            LED_PORT |= (_led_mode_a & 0x0C)<<LED_SHIFT;
             break;
         case LED_INTENS_4:
         case LED_CYCLES/2 + LED_INTENS_4:
-            LED_PORT &= ~(0x0F);
+            LED_PORT &= ~(0x0F<<LED_SHIFT);
             break;
         case LED_INTENS_3:
         case LED_CYCLES/2 + LED_INTENS_3:
             //LED_PORT &= ~( ( (led_lum>>4) & (~led_lum) ) & 0x0F );
             //LED_PORT &= (~led_lum>>4) | (led_lum) | 0xF0;
-            LED_PORT &= ~_led_mode_a>>4 | 0xF0;
+            LED_PORT &= ~((_led_mode_a>>4 | 0xF0)<<LED_SHIFT);
             break;
         case LED_INTENS_2:
         case LED_CYCLES/2 + LED_INTENS_2:
             //LED_PORT &= ~( ( (~led_lum>>4) & (led_lum) ) & 0x0F );
             //LED_PORT &= (led_lum>>4) | (~led_lum) | 0xF0;
-            LED_PORT &= ~_led_mode_b | 0xF0;
+            LED_PORT &= ~((_led_mode_b | 0xF0)<<LED_SHIFT);
             break;
         case LED_INTENS_1:
         case LED_CYCLES/2 + LED_INTENS_1:
             //LED_PORT &= ~( ( (~led_lum>>4) & (~led_lum) ) & 0x0F );
             //LED_PORT &= (led_lum>>4) | (led_lum) | 0xF0;
-            LED_PORT &= ~_led_mode_b>>4 | 0xF0;
+            LED_PORT &= ~((_led_mode_b>>4 | 0xF0)<<LED_SHIFT);
             break;
     }
     led_pwm_cycle++;
 
 }
 
-void led_init_timer_port () {
+void led_init_timer () {
     TCCR0A = (1<<WGM01); // CTC
     TCCR0B = (1<<CS02); // PRESCALE /256
     OCR0A = 0;
     TIMSK |= (1<<OCIE0A);
+}
+
+void led_init_port () {
     // signal leds
-    LED_DDR |= 0x0f;
+    LED_DDR |= (0x0f<<LED_SHIFT);
     // power leds
     PLED_DDR |= ((1<<PLED_RED) | (1<<PLED_GREEN));
 }
-

@@ -10,14 +10,15 @@
 #define LED_INTENS_2 13
 #define LED_INTENS_1 3
 
-// led port (always 0-3!)
-#define LED_PORT PORTD
-#define LED_DDR  DDRD
+#define LED_PORT PORTB
+#define LED_DDR  DDRB
+// LED_UPPER=1 => 4-7, else 0-3
+#define LED_UPPER   1
 
-#define PLED_RED    5
-#define PLED_GREEN  4
-#define PLED_PORT   PORTD
-#define PLED_DDR    DDRD
+#define PLED_RED    0
+#define PLED_GREEN  1
+#define PLED_PORT   PORTA
+#define PLED_DDR    DDRA
 
 
 inline void pled_off( uint8_t mask ) {
@@ -47,7 +48,8 @@ void led_set_mode( uint8_t l1_mode, uint8_t l2_mode,
         uint8_t l3_mode, uint8_t l4_mode);
 
 void led_start_timer0( void );
-void led_init_timer_port( void );
+void led_init_timer( void );
+void led_init_port( void );
 
 ISR (TIMER0_COMPA_vect);
 

@@ -2,7 +2,7 @@
 #define _SLEEP_H
 
 #define PWRDOWN_PRR (1<<PRTIM1) | (1<<PRTIM0)
-#define POWER_PIN   2
+#define POWER_PIN   0
 #define POWER_PORT  PORTB
 #define POWER_DDR   DDRB
 

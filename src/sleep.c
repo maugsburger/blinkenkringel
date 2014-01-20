@@ -35,7 +35,6 @@ void sleep_powerdown( void ){
     cli();
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     //sleep_mode();   
-    //FIXME turn off bod while in sleep, see p.38 datasheet
     sleep_enable();
     BODCR = (1<<BPDS) | (1<<BPDSE);
     BODCR = (1<<BPDS);

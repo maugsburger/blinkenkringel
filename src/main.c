@@ -24,10 +24,15 @@
  */
 
 int main (void) {
+
     // disable unused functions for powersaving
     PRR = (1<<PRUSI) | (1<<PRUSART);
 
+    DDRA = 0xff;
+
     change_clock_prescale( 0x01 );  // full speed 4MHz
+
+    led_init_port();
 
     // brownout @1.8V if device is started with insuficcient bats.
     if ( mcusr_mirror == (1<<BORF) ) {
@@ -46,7 +51,7 @@ int main (void) {
     DIDR |= (1<<AIN1D);
 
     // init pwm counter
-    led_init_timer_port();
+    led_init_timer();
     key_init_timer_port();
 
     // alive signal 
