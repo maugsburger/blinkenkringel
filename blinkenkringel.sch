@@ -16275,6 +16275,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <part name="SUPPLY10" library="supply2" deviceset="V+" device=""/>
 <part name="R40" library="rcl" deviceset="R-EU_" device="0207/7" value="1M"/>
 <part name="R41" library="pot" deviceset="TRIM_EU-" device="CA9V" value="10k"/>
+<part name="SUPPLY16" library="supply2" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16426,6 +16427,7 @@ but seems to work fine</text>
 <instance part="SUPPLY10" gate="1" x="160.02" y="170.18"/>
 <instance part="R40" gate="G$1" x="134.62" y="137.16" rot="R270"/>
 <instance part="R41" gate="1" x="43.18" y="160.02" rot="R270"/>
+<instance part="SUPPLY16" gate="GND" x="119.38" y="152.4"/>
 </instances>
 <busses>
 </busses>
@@ -16436,19 +16438,10 @@ but seems to work fine</text>
 <wire x1="154.94" y1="154.94" x2="157.48" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="154.94" x2="157.48" y2="149.86" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="149.86" x2="142.24" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="149.86" x2="127" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="127" y1="149.86" x2="127" y2="154.94" width="0.1524" layer="91"/>
-<pinref part="DD-GND1" gate="1" pin="MP"/>
-<wire x1="127" y1="154.94" x2="129.54" y2="154.94" width="0.1524" layer="91"/>
-<junction x="127" y="149.86"/>
 <pinref part="R2" gate="G$1" pin="1"/>
 <wire x1="91.44" y1="160.02" x2="96.52" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="160.02" x2="96.52" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="149.86" x2="127" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="127" y1="154.94" x2="119.38" y2="154.94" width="0.1524" layer="91"/>
-<junction x="127" y="154.94"/>
-<pinref part="C1" gate="G$1" pin="-"/>
-<wire x1="119.38" y1="154.94" x2="119.38" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="149.86" x2="142.24" y2="149.86" width="0.1524" layer="91"/>
 <pinref part="Q1" gate="G$1" pin="D"/>
 <junction x="142.24" y="149.86"/>
 </segment>
@@ -16540,6 +16533,14 @@ but seems to work fine</text>
 <pinref part="C5" gate="G$1" pin="2"/>
 <pinref part="SUPPLY7" gate="GND" pin="GND"/>
 <wire x1="68.58" y1="149.86" x2="68.58" y2="147.32" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C1" gate="G$1" pin="-"/>
+<pinref part="DD-GND1" gate="1" pin="MP"/>
+<wire x1="129.54" y1="154.94" x2="119.38" y2="154.94" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="154.94" x2="119.38" y2="157.48" width="0.1524" layer="91"/>
+<pinref part="SUPPLY16" gate="GND" pin="GND"/>
+<junction x="119.38" y="154.94"/>
 </segment>
 </net>
 <net name="VCC" class="0">
