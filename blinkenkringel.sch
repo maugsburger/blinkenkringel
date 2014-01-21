@@ -16306,6 +16306,7 @@ but seems to work fine</text>
 <text x="30.48" y="76.2" size="0.8128" layer="97" rot="R180">R calc'ed for Ubat,max=3,2V</text>
 <text x="7.62" y="71.12" size="1.778" layer="97">grün</text>
 <text x="7.62" y="63.5" size="1.778" layer="97">rot</text>
+<wire x1="134.62" y1="154.94" x2="149.86" y2="154.94" width="0.1" layer="97" style="shortdash"/>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -16427,7 +16428,7 @@ but seems to work fine</text>
 <instance part="SUPPLY10" gate="1" x="160.02" y="170.18"/>
 <instance part="R40" gate="G$1" x="134.62" y="137.16" rot="R270"/>
 <instance part="R41" gate="1" x="43.18" y="160.02" rot="R270"/>
-<instance part="SUPPLY16" gate="GND" x="119.38" y="152.4"/>
+<instance part="SUPPLY16" gate="GND" x="119.38" y="154.94"/>
 </instances>
 <busses>
 </busses>
@@ -16441,9 +16442,14 @@ but seems to work fine</text>
 <pinref part="R2" gate="G$1" pin="1"/>
 <wire x1="91.44" y1="160.02" x2="96.52" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="160.02" x2="96.52" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="149.86" x2="142.24" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="149.86" x2="124.46" y2="149.86" width="0.1524" layer="91"/>
 <pinref part="Q1" gate="G$1" pin="D"/>
 <junction x="142.24" y="149.86"/>
+<pinref part="DD-GND1" gate="1" pin="MP"/>
+<wire x1="124.46" y1="149.86" x2="142.24" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="154.94" x2="124.46" y2="154.94" width="0.1524" layer="91"/>
+<wire x1="124.46" y1="154.94" x2="124.46" y2="149.86" width="0.1524" layer="91"/>
+<junction x="124.46" y="149.86"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -16536,11 +16542,7 @@ but seems to work fine</text>
 </segment>
 <segment>
 <pinref part="C1" gate="G$1" pin="-"/>
-<pinref part="DD-GND1" gate="1" pin="MP"/>
-<wire x1="129.54" y1="154.94" x2="119.38" y2="154.94" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="154.94" x2="119.38" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="SUPPLY16" gate="GND" pin="GND"/>
-<junction x="119.38" y="154.94"/>
 </segment>
 </net>
 <net name="VCC" class="0">
