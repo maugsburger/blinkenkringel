@@ -99,9 +99,12 @@ int main (void) {
                     }
                     if( get_key_long( 1<<KEY0 )) {
                         pled_off( (1<<PLED_RED) | (1<<PLED_GREEN) );
+                        power_boost( 0 );
                         // wait for key release (with pullup=>1)
                         loop_until_bit_is_set( KEY_PIN, KEY0 );
+                        // give key some time to debounce
                         sleep_powerdown();
+                        _delay_ms(500);
                     }
                 } else {
                     led_set_mode_r(
