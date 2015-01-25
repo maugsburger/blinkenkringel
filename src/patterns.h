@@ -95,6 +95,15 @@ const __flash pattern_element * const __flash lp_elements_rampall[] = {
     &lpe_2222_100,
 };
 
+const __flash pattern_element * const __flash lp_elements_flash_triple[] = { 
+    &lpe_4444_30,
+    &lpe_0000_30,
+    &lpe_4444_30,
+    &lpe_0000_30,
+    &lpe_4444_30,
+    &lpe_0000_200,
+};
+
 const __flash pattern_element * const __flash lp_elements_rampallflash[] = { 
     &lpe_1111_100,
     &lpe_2222_100,
@@ -129,6 +138,7 @@ const __flash light_pattern lp_stand_dim = { 1, 1, &lp_elements_single_dim };
 const __flash light_pattern lp_stand_upramp = { 5, 1, &lp_elements_single_upramp };
 const __flash light_pattern lp_rampall = { 6, 1, &lp_elements_rampall };
 const __flash light_pattern lp_rampallflash = { 10, 1, &lp_elements_rampallflash };
+const __flash light_pattern lp_flash_triple = { 6, 1, &lp_elements_flash_triple };
 const __flash light_pattern lp_all_max = { 1, 1, &lp_elements_allmax };
 const __flash light_pattern lp_all_dim = { 1, 1, &lp_elements_alldim };
 
@@ -138,6 +148,7 @@ const __flash light_pattern *light_patterns[] = {
     &lp_rotate_superfast,
     &lp_rampall,
     &lp_rampallflash,
+    &lp_flash_triple,
     &lp_flash_s,
     &lp_dualflash,
     &lp_dualflash_s,
