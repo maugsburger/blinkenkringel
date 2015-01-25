@@ -103,8 +103,8 @@ int main (void) {
                         // wait for key release (with pullup=>1)
                         loop_until_bit_is_set( KEY_PIN, KEY0 );
                         // give key some time to debounce
+                        _delay_ms(100);
                         sleep_powerdown();
-                        _delay_ms(500);
                     }
                 } else {
                     led_set_mode_r(
@@ -126,7 +126,7 @@ void blink_red_powersave() {
     PRR |= PWRDOWN_PRR; // disable timer 
     pled_on( 1<<PLED_RED);
     pled_off(1<<PLED_GREEN);
-    for(uint8_t i=10; i!=0; i--){   // TODO: raise to 100 after development
+    for(uint8_t i=100; i!=0; i--){
         pled_toggle(1<<PLED_RED);
         _delay_ms(300);
     }
