@@ -30,7 +30,7 @@ void sleep_powerdown( void ){
     PRR |= PWRDOWN_PRR;
     // activate ICP interrupt
 //    TIMSK |= (1<<ICIE1);
-    GIMSK |= (1<<4);    //PCIE2
+    GIMSK |= (1<<PCIE2);
     PCMSK2 |= (1<<PCINT17);
     cli();
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
@@ -59,7 +59,7 @@ void power_boost (uint8_t on) {
     }
 }
 
-ISR (PCINT_D_vect) {
+ISR (PCINT2_vect) {
     // simulate hard reset with wdt
     soft_reset();
 }
