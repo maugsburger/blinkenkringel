@@ -73,7 +73,7 @@ uint8_t get_key_long( uint8_t key_mask ) {
 
 
 void key_init_timer_port( void ) {
-    OCR1A = 0x271;          // 625
+    OCR1A = 0x139;          // 625
     TCCR1B = (1<<WGM12) | (1<<CS10) | (1<<CS11); // /64, CTC
     TIMSK |= (1<<OCIE1A);    // Interrupt
 
