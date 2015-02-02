@@ -1,6 +1,8 @@
 #ifndef _PATTERNS_H
 #define _PATTERNS_H
 
+#define LP(X) sizeof(X)/sizeof(X[0]), &X
+
 typedef const __flash struct {
     const uint8_t l12;
     const uint8_t l34;
@@ -8,8 +10,8 @@ typedef const __flash struct {
 } pattern_element;
 
 typedef const __flash struct {
-    const uint8_t nr_elements;
     const uint8_t rotate;
+    const uint8_t nr_elements;
     const __flash pattern_element * const __flash (*lp_elements)[];
 } light_pattern;
 
@@ -126,21 +128,21 @@ const __flash pattern_element * const __flash lp_elements_alldim[] = {
 };
 
 
-const __flash light_pattern lp_dualflash = { 4, 1, &lp_elements_dualflash };
-const __flash light_pattern lp_dualflash_s = { 4, 2, &lp_elements_dualflash_split };
-const __flash light_pattern lp_flash_s = { 4, 2, &lp_elements_flash_split };
-const __flash light_pattern lp_flash_dim = { 2, 1, &lp_elements_flash_dim };
-const __flash light_pattern lp_rotate = { 4, 4, &lp_elements_rotate };
-const __flash light_pattern lp_rotate_fast = { 4, 4, &lp_elements_rotate_fast };
-const __flash light_pattern lp_rotate_superfast = { 4, 4, &lp_elements_rotate_superfast };
-const __flash light_pattern lp_rotate_dim = { 1, 4, &lp_elements_single_dim };
-const __flash light_pattern lp_stand_dim = { 1, 1, &lp_elements_single_dim };
-const __flash light_pattern lp_stand_upramp = { 5, 1, &lp_elements_single_upramp };
-const __flash light_pattern lp_rampall = { 6, 1, &lp_elements_rampall };
-const __flash light_pattern lp_rampallflash = { 10, 1, &lp_elements_rampallflash };
-const __flash light_pattern lp_flash_triple = { 6, 1, &lp_elements_flash_triple };
-const __flash light_pattern lp_all_max = { 1, 1, &lp_elements_allmax };
-const __flash light_pattern lp_all_dim = { 1, 1, &lp_elements_alldim };
+const __flash light_pattern lp_dualflash        = { 1, LP(lp_elements_dualflash) };
+const __flash light_pattern lp_dualflash_s      = { 2, LP(lp_elements_dualflash_split) };
+const __flash light_pattern lp_flash_s          = { 2, LP(lp_elements_flash_split) };
+const __flash light_pattern lp_flash_dim        = { 1, LP(lp_elements_flash_dim) };
+const __flash light_pattern lp_rotate           = { 4, LP(lp_elements_rotate) };
+const __flash light_pattern lp_rotate_fast      = { 4, LP(lp_elements_rotate_fast) };
+const __flash light_pattern lp_rotate_superfast = { 4, LP(lp_elements_rotate_superfast) };
+const __flash light_pattern lp_rotate_dim       = { 4, LP(lp_elements_single_dim) };
+const __flash light_pattern lp_stand_dim        = { 1, LP(lp_elements_single_dim) };
+const __flash light_pattern lp_stand_upramp     = { 1, LP(lp_elements_single_upramp) };
+const __flash light_pattern lp_rampall          = { 1, LP(lp_elements_rampall) };
+const __flash light_pattern lp_rampallflash     = { 1, LP(lp_elements_rampallflash) };
+const __flash light_pattern lp_flash_triple     = { 1, LP(lp_elements_flash_triple) };
+const __flash light_pattern lp_all_max          = { 1, LP(lp_elements_allmax) };
+const __flash light_pattern lp_all_dim          = { 1, LP(lp_elements_alldim) };
 
 const __flash light_pattern *light_patterns[] = {
     &lp_rotate,
