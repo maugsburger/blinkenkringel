@@ -59,7 +59,7 @@ int main (void) {
     led_set_mode_r( 0x11, 0x11, 0 );
     _delay_ms(50);
     led_set_mode_r( 0x00, 0x00, 0 );
-    _delay_ms(500);
+    _delay_ms(200);
     pled_off( (1<<PLED_RED) );
 
     // check initial bat state for undervolt
